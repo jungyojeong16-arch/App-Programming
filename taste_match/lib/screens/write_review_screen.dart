@@ -96,33 +96,41 @@ class _WriteReviewScreenState extends State<WriteReviewScreen> {
             const SizedBox(height: 12),
 
             // ── 별점 ──
-            Row(
+            // 별 줄과 안내 문구를 한 Column 에 묶었습니다.
+            // 안내 문구를 ListView 에 바로 넣으면, 문구가 나타날 때 아래 칸들의
+            // 순서가 밀리면서 코멘트 칸이 새로 만들어지고 그 오류 표시가 사라집니다.
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                for (var i = 1; i <= 5; i++)
-                  IconButton(
-                    tooltip: '별 $i개',
-                    iconSize: 36,
-                    onPressed: () => setState(() {
-                      _rating = i;
-                      _showRatingError = false;
-                    }),
-                    icon: Icon(
-                      i <= _rating
-                          ? Icons.star_rounded
-                          : Icons.star_outline_rounded,
-                      color: const Color(0xFFF5A524),
+                Row(
+                  children: [
+                    for (var i = 1; i <= 5; i++)
+                      IconButton(
+                        tooltip: '별 $i개',
+                        iconSize: 36,
+                        onPressed: () => setState(() {
+                          _rating = i;
+                          _showRatingError = false;
+                        }),
+                        icon: Icon(
+                          i <= _rating
+                              ? Icons.star_rounded
+                              : Icons.star_outline_rounded,
+                          color: const Color(0xFFF5A524),
+                        ),
+                      ),
+                  ],
+                ),
+                if (_showRatingError)
+                  Padding(
+                    padding: const EdgeInsets.only(left: 12, bottom: 4),
+                    child: Text(
+                      '별점을 골라 주세요',
+                      style: TextStyle(color: theme.colorScheme.error),
                     ),
                   ),
               ],
             ),
-            if (_showRatingError)
-              Padding(
-                padding: const EdgeInsets.only(left: 12, bottom: 4),
-                child: Text(
-                  '별점을 골라 주세요',
-                  style: TextStyle(color: theme.colorScheme.error),
-                ),
-              ),
             const SizedBox(height: 12),
 
             // ── 코멘트 ──

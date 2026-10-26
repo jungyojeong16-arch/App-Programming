@@ -96,9 +96,11 @@ void main() {
     // 카페만 보이게 한 뒤, 새로 생겨서 비슷한 취향 리뷰가 없는 '카페 틈' 열기
     await tester.tap(find.text('카페'));
     await tester.pumpAndSettle();
+
+    // 테스트 화면은 작아서 세 번째 카드가 아래에 있으므로, 보일 때까지 스크롤
+    await tester.scrollUntilVisible(find.text('카페 틈'), 200);
     expect(find.text('비슷한 취향 리뷰 없음 · 분위기로 추천'), findsOneWidget);
 
-    await tester.ensureVisible(find.text('카페 틈'));
     await tester.tap(find.text('카페 틈'));
     await tester.pumpAndSettle();
 
