@@ -1,0 +1,22 @@
+name: taste_match
+description: "내 취향과 결이 맞는 사람들의 리뷰로 음식점·카페를 찾는 앱 (프로토타입)"
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.0
+
+# 외부 패키지 없이 플러터 기본 기능만 사용합니다.
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
