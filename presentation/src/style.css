@@ -1,0 +1,94 @@
+@font-face { font-family: 'KR'; font-weight: 400; src: url('fonts/NotoSansKR-400.ttf'); }
+@font-face { font-family: 'KR'; font-weight: 500; src: url('fonts/NotoSansKR-500.ttf'); }
+@font-face { font-family: 'KR'; font-weight: 700; src: url('fonts/NotoSansKR-700.ttf'); }
+@font-face { font-family: 'KR'; font-weight: 900; src: url('fonts/NotoSansKR-900.ttf'); }
+
+:root {
+  --brand: #FF5A36;
+  --brand-dark: #E2431F;
+  --brand-soft: #FFF0EA;
+  --ink: #1D1D1F;
+  --sub: #6E6E73;
+  --line: #ECECEF;
+  --good: #16A05A;
+  --good-soft: #E6F6EC;
+  --bad: #E5484D;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  width: 1920px; height: 1080px; overflow: hidden;
+  font-family: 'KR', 'Noto Color Emoji', sans-serif;
+  color: var(--ink);
+  background: radial-gradient(circle at 15% 0%, #FFE6DC 0, #FAF7F5 45%) , #FAF7F5;
+}
+.emoji { font-family: 'Noto Color Emoji'; }
+
+/* ---------- slide header ---------- */
+.head { position: absolute; left: 80px; right: 80px; top: 44px; display: flex; justify-content: space-between; align-items: flex-start; }
+.kicker { display: inline-block; font-size: 22px; font-weight: 700; color: var(--brand); background: var(--brand-soft); padding: 6px 16px; border-radius: 999px; }
+.title { font-size: 50px; font-weight: 900; letter-spacing: -1.5px; margin-top: 12px; }
+.title em { font-style: normal; color: var(--brand); }
+.subtitle { font-size: 24px; color: var(--sub); margin-top: 6px; font-weight: 500; }
+.logo { display: flex; align-items: center; gap: 10px; font-size: 30px; font-weight: 900; color: var(--brand); letter-spacing: -1px; }
+.logo .mark { width: 44px; height: 44px; border-radius: 14px; background: var(--brand); color: #fff; display: grid; place-items: center; font-size: 24px; }
+
+/* ---------- layout ---------- */
+.row { position: absolute; left: 0; right: 0; top: 232px; display: flex; justify-content: center; gap: 150px; }
+.col { position: relative; width: 360px; display: flex; flex-direction: column; align-items: center; }
+.who { font-size: 22px; font-weight: 700; margin-bottom: 12px; color: var(--ink); display: flex; gap: 8px; align-items: center; }
+.who .num { width: 32px; height: 32px; border-radius: 50%; background: var(--ink); color: #fff; display: grid; place-items: center; font-size: 18px; }
+.caption { margin-top: 18px; width: 430px; text-align: center; font-size: 22px; line-height: 1.4; font-weight: 500; color: var(--sub); }
+.caption b { color: var(--ink); font-weight: 900; }
+.caption b.hl { color: var(--brand); }
+
+/* ---------- phone frame ---------- */
+.phone { width: 360px; height: 700px; border-radius: 52px; background: #121214; padding: 11px; box-shadow: 0 30px 60px rgba(60, 30, 20, .18), 0 6px 14px rgba(0,0,0,.12); position: relative; }
+.screen { width: 100%; height: 100%; border-radius: 42px; overflow: hidden; background: #fff; position: relative; display: flex; flex-direction: column; }
+.island { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 92px; height: 26px; border-radius: 20px; background: #000; z-index: 10; }
+.status { height: 44px; flex: none; display: flex; justify-content: space-between; align-items: center; padding: 8px 28px 0; font-size: 14px; font-weight: 700; }
+.status .icons { font-size: 12px; letter-spacing: 2px; }
+
+/* ---------- app chrome ---------- */
+.appbar { padding: 4px 18px 12px; flex: none; }
+.appbar .brandline { display: flex; justify-content: space-between; align-items: center; font-weight: 900; color: var(--brand); font-size: 18px; }
+.appbar .greet { font-size: 20px; font-weight: 900; margin-top: 8px; letter-spacing: -.5px; line-height: 1.3; }
+.chips { display: flex; gap: 6px; padding: 0 18px 12px; flex: none; }
+.chip { font-size: 13px; font-weight: 700; padding: 6px 11px; border-radius: 999px; background: #F3F3F5; color: var(--sub); white-space: nowrap; }
+.chip.on { background: var(--ink); color: #fff; }
+.body { flex: 1; overflow: hidden; padding: 0 14px; display: flex; flex-direction: column; gap: 10px; }
+.tabbar { flex: none; height: 64px; border-top: 1px solid var(--line); display: flex; justify-content: space-around; align-items: center; font-size: 11px; color: #9A9AA0; font-weight: 700; padding-bottom: 8px; }
+.tabbar div { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.tabbar .ic { font-size: 18px; }
+.tabbar .on { color: var(--brand); }
+
+/* ---------- cards ---------- */
+.card { border: 1px solid var(--line); border-radius: 18px; padding: 10px; display: flex; gap: 10px; background: #fff; align-items: center; }
+.card.big { flex-direction: column; align-items: stretch; padding: 0; overflow: hidden; border: 2px solid var(--brand); box-shadow: 0 8px 20px rgba(255, 90, 54, .15); }
+.thumb { width: 64px; height: 64px; border-radius: 14px; display: grid; place-items: center; font-size: 30px; flex: none; }
+.hero { height: 112px; display: grid; place-items: center; font-size: 46px; position: relative; }
+.rank { position: absolute; left: 10px; top: 10px; background: var(--brand); color: #fff; font-size: 13px; font-weight: 900; padding: 4px 10px; border-radius: 999px; }
+.cbody { padding: 10px 12px 12px; }
+.name { font-size: 17px; font-weight: 900; display: flex; justify-content: space-between; align-items: center; }
+.match { font-size: 13px; font-weight: 900; color: var(--good); background: var(--good-soft); padding: 3px 9px; border-radius: 999px; }
+.match.low { color: #8E8E93; background: #F2F2F4; }
+.tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 7px; }
+.tag { font-size: 12px; font-weight: 700; color: var(--brand-dark); background: var(--brand-soft); padding: 3px 8px; border-radius: 8px; }
+.tag.gray { color: #8E8E93; background: #F2F2F4; }
+.meta { font-size: 12px; color: var(--sub); margin-top: 6px; font-weight: 500; }
+.small .name { font-size: 15px; }
+.dim { opacity: .55; }
+
+.g-cafe { background: linear-gradient(135deg, #F6E7D3, #E9CFAF); }
+.g-book { background: linear-gradient(135deg, #E4EEF9, #C9DBF2); }
+.g-pink { background: linear-gradient(135deg, #FFE1EA, #F7C3E0); }
+.g-sun { background: linear-gradient(135deg, #FFD9B8, #F5A3A8); }
+.g-green { background: linear-gradient(135deg, #DDF3E2, #BCE6C8); }
+.g-yellow { background: linear-gradient(135deg, #FFF3C4, #FFE08A); }
+.g-red { background: linear-gradient(135deg, #FFE0D6, #FFB9A3); }
+.g-purple { background: linear-gradient(135deg, #E9E3FF, #CFC3FF); }
+
+/* callout sticker */
+.sticker { position: absolute; z-index: 20; background: var(--bad); color: #fff; font-weight: 900; font-size: 17px; padding: 10px 14px; border-radius: 14px; box-shadow: 0 8px 18px rgba(229, 72, 77, .35); line-height: 1.3; }
+.sticker.green { background: var(--good); box-shadow: 0 8px 18px rgba(22, 160, 90, .35); }
+.sticker.brand { background: var(--brand); box-shadow: 0 8px 18px rgba(255, 90, 54, .35); }

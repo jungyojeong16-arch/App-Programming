@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><link rel="stylesheet" href="style.css">
+<style>
+  /* 취향 월드컵 */
+  .wc-top { padding: 4px 18px 0; }
+  .wc-top .t { display: flex; justify-content: space-between; align-items: baseline; font-weight: 900; font-size: 20px; }
+  .wc-top .t span { font-size: 14px; color: var(--brand); }
+  .bar { height: 8px; border-radius: 8px; background: #F0F0F2; margin-top: 10px; overflow: hidden; }
+  .bar i { display: block; height: 100%; background: var(--brand); border-radius: 8px; }
+  .q { text-align: center; font-size: 17px; font-weight: 700; margin: 14px 0 10px; }
+  .pick { margin: 0 16px; height: 210px; border-radius: 22px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; position: relative; }
+  .pick .e { font-size: 66px; }
+  .pick .l { font-size: 18px; font-weight: 900; }
+  .pick .s { font-size: 13px; color: var(--sub); font-weight: 500; }
+  .pick.sel { outline: 4px solid var(--brand); }
+  .tap { position: absolute; right: 22px; bottom: 18px; font-size: 40px; }
+  .vs { width: 52px; height: 52px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 900; font-size: 18px; display: grid; place-items: center; margin: -16px auto; position: relative; z-index: 2; border: 4px solid #fff; }
+  .hint { text-align: center; font-size: 13px; color: var(--sub); font-weight: 700; margin-top: 12px; }
+
+  /* 결과 카드 */
+  .result { background: linear-gradient(160deg, #FF7A52 0%, #FF5A86 100%); color: #fff; }
+  .result .status { color: #fff; }
+  .rc { margin: 6px 16px 0; text-align: center; }
+  .rc .lbl { font-size: 14px; font-weight: 700; opacity: .9; }
+  .rc .big { font-size: 74px; margin-top: 4px; }
+  .rc .type { font-size: 27px; font-weight: 900; letter-spacing: -1px; line-height: 1.25; margin-top: 2px; }
+  .rc .desc { font-size: 13px; opacity: .92; margin-top: 6px; font-weight: 500; }
+  .traits { margin: 14px 16px 0; background: rgba(255,255,255,.18); border-radius: 18px; padding: 12px 14px; display: flex; flex-direction: column; gap: 9px; }
+  .tr { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; }
+  .tr span { width: 86px; }
+  .tr .b { flex: 1; height: 8px; border-radius: 8px; background: rgba(255,255,255,.3); overflow: hidden; }
+  .tr .b i { display: block; height: 100%; background: #fff; border-radius: 8px; }
+  .btn { margin: 0 16px; border-radius: 16px; padding: 13px; text-align: center; font-weight: 900; font-size: 15px; }
+  .btn.w { background: #fff; color: var(--brand-dark); margin-top: 14px; }
+  .btn.o { border: 2px solid rgba(255,255,255,.8); color: #fff; margin-top: 8px; }
+
+  /* 잠금화면 */
+  .lock { background: linear-gradient(170deg, #2B2F55 0%, #5B3A73 55%, #C46A6A 100%); color: #fff; }
+  .lock .status { color: #fff; }
+  .ldate { text-align: center; font-size: 16px; font-weight: 700; margin-top: 14px; opacity: .9; }
+  .ltime { text-align: center; font-size: 78px; font-weight: 700; letter-spacing: -2px; line-height: 1.05; }
+  .noti { margin: 0 12px; background: rgba(255,255,255,.92); color: var(--ink); border-radius: 22px; padding: 12px 14px; }
+  .noti .hd { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--sub); font-weight: 700; }
+  .noti .hd .ico { width: 22px; height: 22px; border-radius: 7px; background: var(--brand); display: grid; place-items: center; font-size: 12px; }
+  .noti .hd .tm { margin-left: auto; font-weight: 500; }
+  .noti .msg { font-size: 15px; font-weight: 900; margin-top: 6px; }
+  .noti .sub { font-size: 13px; color: var(--sub); margin-top: 2px; font-weight: 500; }
+  .react { display: flex; gap: 6px; margin-top: 10px; }
+  .react div { flex: 1; background: #F2F2F4; border-radius: 12px; padding: 8px 0; text-align: center; font-size: 12px; font-weight: 700; }
+  .react div .em { font-size: 24px; display: block; }
+  .react div.hit { background: var(--brand-soft); outline: 2px solid var(--brand); }
+  .finger { position: absolute; font-size: 44px; z-index: 5; }
+</style></head>
+<body>
+  <div class="head">
+    <div>
+      <span class="kicker">핵심가치 ① 귀차니즘 제로 · 재미</span>
+      <div class="title">별점보다 가볍게, <em>게임처럼</em> 취향이 쌓인다</div>
+      <div class="subtitle">사람들이 하는 최대 행동은 별점 주기 → 그보다 쉽고 재미있어야 계속 쓴다</div>
+    </div>
+    <div class="logo"><div class="mark">📍</div>취향지도</div>
+  </div>
+
+  <div class="row">
+    <!-- 1. 취향 월드컵 -->
+    <div class="col">
+      <div class="who"><span class="num">1</span>설문 대신 취향 월드컵</div>
+      <div class="phone"><div class="screen">
+        <div class="island"></div>
+        <div class="status"><span>9:41</span><span class="icons">●●● ▲ ▮</span></div>
+        <div class="wc-top">
+          <div class="t">카페 취향 월드컵 <span>16강 · 3 / 8</span></div>
+          <div class="bar"><i style="width:30%"></i></div>
+        </div>
+        <div class="q">둘 중 더 끌리는 곳은?</div>
+        <div class="pick g-book sel"><div class="e emoji">☕📚</div><div class="l">조용한 북카페</div><div class="s">콘센트 많음 · 오래 앉기 좋음</div><span class="tap emoji">👆</span></div>
+        <div class="vs">VS</div>
+        <div class="pick g-sun"><div class="e emoji">🌇🍹</div><div class="l">감성 루프탑 카페</div><div class="s">노을 뷰 · 음악 있음</div></div>
+        <div class="hint">탭 한 번으로 선택 · 30초면 끝나요</div>
+      </div></div>
+      <div class="caption"><b>사진 고르기 30초</b>로<br>첫 추천 완성 — 설문 입력 없음</div>
+    </div>
+
+    <!-- 2. 결과 카드 -->
+    <div class="col">
+      <div class="who"><span class="num">2</span>공유하고 싶은 취향 유형</div>
+      <div class="phone"><div class="screen result">
+        <div class="island"></div>
+        <div class="status"><span>9:41</span><span class="icons">●●● ▲ ▮</span></div>
+        <div class="rc">
+          <div class="lbl">준호님의 취향 유형은</div>
+          <div class="big emoji">🍰</div>
+          <div class="type">조용한<br>디저트 탐험가</div>
+          <div class="desc">전체 사용자 중 12%가 같은 유형이에요</div>
+        </div>
+        <div class="traits">
+          <div class="tr"><span>조용함</span><div class="b"><i style="width:90%"></i></div></div>
+          <div class="tr"><span>작업하기 좋음</span><div class="b"><i style="width:90%"></i></div></div>
+          <div class="tr"><span>단맛</span><div class="b"><i style="width:70%"></i></div></div>
+          <div class="tr"><span>가성비</span><div class="b"><i style="width:80%"></i></div></div>
+        </div>
+        <div class="btn w">📸 인스타 스토리로 공유</div>
+        <div class="btn o">💞 친구와 취향 궁합 보기</div>
+        <div style="text-align:center;font-size:13px;font-weight:700;margin-top:16px;opacity:.95">친구 서연님과의 궁합 <span style="font-size:20px;font-weight:900">72%</span></div>
+      </div></div>
+      <div class="caption">결과를 <b>공유</b>하고 친구와 <b>궁합</b>을 보며<br>앱이 자연스럽게 퍼진다</div>
+    </div>
+
+    <!-- 3. 잠금화면 원탭 피드백 -->
+    <div class="col">
+      <div class="who"><span class="num">3</span>방문 후 알림에서 원탭</div>
+      <div class="phone"><div class="screen lock">
+        <div class="island"></div>
+        <div class="status"><span></span><span class="icons">●●● ▲ ▮</span></div>
+        <div class="ldate">11월 16일 월요일</div>
+        <div class="ltime">14:27</div>
+        <div style="height:26px"></div>
+        <div class="noti">
+          <div class="hd"><span class="ico">📍</span>취향지도<span class="tm">방금</span></div>
+          <div class="msg">카페 A 어땠어요?</div>
+          <div class="sub">방금 다녀온 것 같아요. 한 번만 눌러주세요</div>
+          <div class="react"><div class="hit"><span class="em emoji">😍</span>최고</div><div><span class="em emoji">🙂</span>괜찮음</div><div><span class="em emoji">😕</span>별로</div></div>
+        </div>
+        <div style="height:10px"></div>
+        <div class="noti" style="opacity:.85">
+          <div class="hd"><span class="ico">📍</span>취향지도<span class="tm">11:40</span></div>
+          <div class="msg">오늘 점심 추천 3곳이 도착했어요 🍜</div>
+          <div class="sub">혼밥 · 웨이팅 없음 · 도보 5분 이내</div>
+        </div>
+        <span class="finger emoji" style="left:84px; top:336px">👆</span>
+      </div></div>
+      <div class="sticker green" style="top:330px; right:-100px; transform: rotate(5deg);">앱을 열 필요도<br>없음</div>
+      <div class="caption"><b class="hl">알림에서 한 번 탭</b>이면 피드백 끝<br>별점보다 가볍다</div>
+    </div>
+  </div>
+</body></html>
