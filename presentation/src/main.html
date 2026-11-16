@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><link rel="stylesheet" href="style.css">
+<style>
+  .top { position: absolute; top: 34px; left: 0; right: 0; display: flex; justify-content: center; align-items: center; gap: 18px; }
+  .top .logo { font-size: 34px; }
+  .top .line { font-size: 30px; font-weight: 900; letter-spacing: -1px; }
+  .top .line em { font-style: normal; color: var(--brand); }
+  .top .sep { width: 2px; height: 30px; background: #E2D8D3; }
+
+  .row { top: 104px; gap: 170px; }
+  .col { width: 414px; }
+  .label { font-size: 24px; font-weight: 900; margin-bottom: 12px; padding: 6px 20px; border-radius: 999px; background: var(--ink); color: #fff; }
+  .label.p { background: var(--bad); }
+  .label.v { background: var(--brand); }
+  .zoom { zoom: 1.12; }
+  .phone { height: 716px; }
+  .caption { width: 460px; margin-top: 16px; font-size: 22px; }
+
+  /* 문제: 기존 지도 앱 */
+  .search { margin: 6px 14px 10px; background: #F2F2F4; border-radius: 12px; padding: 11px 14px; font-size: 15px; font-weight: 700; color: #333; display: flex; gap: 8px; }
+  .map { height: 140px; margin: 0 14px; border-radius: 16px; background:
+      linear-gradient(90deg, transparent 48%, #fff 48%, #fff 52%, transparent 52%),
+      linear-gradient(0deg, transparent 46%, #fff 46%, #fff 54%, transparent 54%),
+      linear-gradient(135deg, #E3EEDF, #DCE7EE); position: relative; }
+  .pin { position: absolute; font-size: 22px; }
+  .olist { padding: 6px 14px; }
+  .oitem { padding: 11px 2px; border-bottom: 1px solid var(--line); }
+  .oitem .n { font-size: 16px; font-weight: 700; display: flex; gap: 6px; align-items: center; }
+  .ad { font-size: 11px; font-weight: 700; color: #fff; background: #9A9AA0; padding: 2px 6px; border-radius: 5px; }
+  .star { font-size: 13px; color: #555; margin-top: 4px; }
+  .star b { color: #F5A623; }
+  .review { margin: 8px 14px 0; font-size: 12px; color: #8E8E93; font-weight: 500; line-height: 1.5; background: #FAFAFB; border-radius: 12px; padding: 10px 12px; }
+  .sticker { font-size: 18px; padding: 9px 14px; white-space: nowrap; }
+  .sticker .s { display: block; font-size: 14px; font-weight: 700; opacity: .92; }
+
+  /* 주제: 홈 */
+  .compare { margin-top: 2px; border-radius: 14px; background: #F7F4FF; padding: 9px 12px; font-size: 13px; font-weight: 700; color: #5B47C8; display: flex; gap: 8px; align-items: center; }
+
+  /* 핵심가치 */
+  .vtitle { padding: 2px 18px 10px; font-size: 21px; font-weight: 900; letter-spacing: -.5px; }
+  .vbox { border: 1px solid var(--line); border-radius: 18px; padding: 11px 13px; }
+  .vbox .k { display: inline-block; font-size: 11px; font-weight: 900; color: var(--brand-dark); background: var(--brand-soft); padding: 3px 8px; border-radius: 7px; }
+  .vbox .k.g { color: var(--good); background: var(--good-soft); }
+  .vbox .h { font-size: 15px; font-weight: 900; margin-top: 6px; }
+  .react { display: flex; gap: 6px; margin-top: 8px; }
+  .react div { flex: 1; background: #F2F2F4; border-radius: 12px; padding: 6px 0; text-align: center; font-size: 11px; font-weight: 700; }
+  .react div .em { font-size: 22px; display: block; }
+  .react div.hit { background: var(--brand-soft); outline: 2px solid var(--brand); }
+  .accrow { display: flex; justify-content: space-between; align-items: baseline; }
+  .accrow b { color: var(--brand); font-size: 18px; }
+  .abar { height: 9px; border-radius: 9px; background: #F0F0F2; margin-top: 6px; overflow: hidden; }
+  .abar i { display: block; height: 100%; width: 78%; background: var(--brand); border-radius: 9px; }
+  .note { font-size: 12px; color: var(--sub); margin-top: 6px; font-weight: 500; }
+  .badges { display: flex; gap: 6px; margin-top: 8px; }
+  .badge { font-size: 11px; font-weight: 700; display: flex; align-items: center; gap: 4px; background: #F5F5F7; border-radius: 999px; padding: 4px 9px 4px 4px; }
+  .badge .em { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; }
+  .plus { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; background: #1D1D1F; color: #fff; border-radius: 14px; padding: 9px 12px; }
+  .plus .n { font-size: 13px; font-weight: 900; }
+  .plus .d { font-size: 11px; opacity: .75; font-weight: 500; margin-top: 1px; }
+  .plus .p { background: var(--brand); border-radius: 10px; padding: 6px 10px; font-size: 12px; font-weight: 900; white-space: nowrap; }
+  .rev { display: flex; gap: 6px; margin-top: 7px; }
+  .rev div { flex: 1; font-size: 11px; font-weight: 700; color: var(--sub); background: #F5F5F7; border-radius: 10px; padding: 6px 4px; text-align: center; line-height: 1.35; }
+</style></head>
+<body>
+  <div class="top">
+    <div class="logo"><div class="mark">📍</div>취향지도</div>
+    <div class="sep"></div>
+    <div class="line">별점 4.5가 아니라, <em>나에게 맞는 곳</em></div>
+  </div>
+
+  <div class="row">
+    <!-- ① 주제 -->
+    <div class="col">
+      <div class="label">① 주제</div>
+      <div class="zoom"><div class="phone"><div class="screen">
+        <div class="island"></div>
+        <div class="status"><span>9:41</span><span class="icons">●●● ▲ ▮</span></div>
+        <div class="appbar">
+          <div class="brandline"><span>📍 취향지도</span><span style="color:var(--ink)">🔔</span></div>
+          <div class="greet">준호님, 지금 공부하기<br>좋은 곳이에요</div>
+        </div>
+        <div class="chips"><span class="chip">혼밥</span><span class="chip on">공부·작업</span><span class="chip">데이트</span><span class="chip">모임</span></div>
+        <div class="body">
+          <div class="card big">
+            <div class="hero g-book"><span class="rank">1위</span><span class="emoji">☕📚</span></div>
+            <div class="cbody">
+              <div class="name">카페 A <span class="match">일치도 95%</span></div>
+              <div class="tags"><span class="tag">#작업하기 좋음</span><span class="tag">#조용함</span><span class="tag">#단맛</span></div>
+              <div class="meta">도보 10분 · 아메리카노 3,000원</div>
+            </div>
+          </div>
+          <div class="card small dim"><div class="thumb g-pink"><span class="emoji">🍰</span></div>
+            <div style="flex:1"><div class="name">카페 B <span class="match low">63%</span></div><div class="meta">#시끄러움 #좌석 적음</div></div></div>
+          <div class="compare"><span class="emoji">💞</span>같은 동네, 서연님의 1위는 카페 B예요</div>
+        </div>
+        <div class="tabbar"><div class="on"><span class="ic">🏠</span>홈</div><div><span class="ic">🗺️</span>지도</div><div><span class="ic">🤍</span>저장</div><div><span class="ic">🙂</span>내 취향</div></div>
+      </div></div></div>
+      <div class="caption">같은 동네라도 <b class="hl">사람마다 1위가 다른</b><br>취향 맞춤 음식점·카페 추천 앱</div>
+    </div>
+
+    <!-- ② 문제 -->
+    <div class="col">
+      <div class="label p">② 문제</div>
+      <div class="zoom"><div class="phone"><div class="screen">
+        <div class="island"></div>
+        <div class="status"><span>9:41</span><span class="icons">●●● ▲ ▮</span></div>
+        <div class="search">🔍 <span>카페</span></div>
+        <div class="map">
+          <span class="pin" style="left:40px;top:28px">📍</span>
+          <span class="pin" style="left:150px;top:66px">📍</span>
+          <span class="pin" style="left:240px;top:26px">📍</span>
+          <span class="pin" style="left:92px;top:92px">📍</span>
+        </div>
+        <div class="olist">
+          <div class="oitem"><div class="n"><span class="ad">광고</span>OO 커피 본점</div><div class="star"><b>★ 4.6</b> · 리뷰 2,341 · 1.2km</div></div>
+          <div class="oitem"><div class="n"><span class="ad">광고</span>브런치 카페 △△</div><div class="star"><b>★ 4.5</b> · 리뷰 1,870 · 0.9km</div></div>
+          <div class="oitem"><div class="n">인기 카페 ☆☆</div><div class="star"><b>★ 4.5</b> · 리뷰 1,512 · 0.6km</div></div>
+          <div class="oitem"><div class="n">디저트 카페 ◇◇</div><div class="star"><b>★ 4.4</b> · 리뷰 1,204 · 1.5km</div></div>
+        </div>
+        <div class="review">"분위기 좋아요" "자리가 없어요" "맛있어요"…<br>리뷰 2,341개 중 내게 맞는 정보는 어디에?</div>
+      </div></div></div>
+      <div class="sticker" style="top:250px; left:-112px; transform: rotate(-4deg);">광고가 1위<span class="s">누가 검색해도 같은 결과</span></div>
+      <div class="sticker" style="top:470px; right:-120px; transform: rotate(4deg);">★4.5 ≠ 내 취향<span class="s">평균일 뿐</span></div>
+      <div class="sticker" style="top:660px; left:-118px; transform: rotate(-3deg);">귀찮다<span class="s">별점 주기가 최대 행동</span></div>
+      <div class="sticker" style="top:800px; right:-112px; transform: rotate(3deg);">처음엔 데이터 0<span class="s">내 취향을 모른다</span></div>
+      <div class="caption"><b>광고·평균 별점</b> 순위, <b>귀찮은</b> 평가,<br>처음엔 <b>데이터가 없는</b> 추천</div>
+    </div>
+
+    <!-- ③ 핵심가치 -->
+    <div class="col">
+      <div class="label v">③ 핵심가치</div>
+      <div class="zoom"><div class="phone"><div class="screen">
+        <div class="island"></div>
+        <div class="status"><span>9:41</span><span class="icons">●●● ▲ ▮</span></div>
+        <div class="vtitle">준호님의 취향지도</div>
+        <div class="body" style="gap:9px">
+          <div class="vbox">
+            <span class="k">귀차니즘 제로 · 탭 한 번</span>
+            <div class="h">방금 다녀온 카페 A 어땠어요?</div>
+            <div class="react"><div class="hit"><span class="em emoji">😍</span>최고</div><div><span class="em emoji">🙂</span>괜찮음</div><div><span class="em emoji">😕</span>별로</div></div>
+          </div>
+          <div class="vbox">
+            <span class="k">데이터 없이 시작 · 쓸수록 정확</span>
+            <div class="accrow h">취향 정확도 <b>78%</b></div>
+            <div class="abar"><i></i></div>
+            <div class="note">아는 가게 3곳 + 취향 월드컵 30초로 시작했어요</div>
+            <div class="badges">
+              <span class="badge"><span class="em g-book emoji">💻</span>카공 마스터</span>
+              <span class="badge"><span class="em g-pink emoji">🍰</span>디저트 헌터</span>
+              <span class="badge"><span class="em g-green emoji">🧭</span>개척자</span>
+            </div>
+          </div>
+          <div class="vbox">
+            <span class="k g">✓ 광고 0개 · 순위는 팔지 않아요</span>
+            <div class="plus">
+              <div><div class="n">취향지도 플러스</div><div class="d">친구와 함께 고르기 · 여행지 추천</div></div>
+              <div class="p">월 2,900원</div>
+            </div>
+            <div class="rev"><div>사장님<br>손님 취향 통계</div><div>예약·배달<br>연결 수수료</div></div>
+          </div>
+        </div>
+        <div class="tabbar"><div><span class="ic">🏠</span>홈</div><div><span class="ic">🗺️</span>지도</div><div><span class="ic">🤍</span>저장</div><div class="on"><span class="ic">🙂</span>내 취향</div></div>
+      </div></div></div>
+      <div class="caption"><b class="hl">탭 한 번</b>으로 쌓이는 취향, <b>3곳으로 시작</b>,<br><b>광고 대신 구독·사장님 통계</b>로 운영</div>
+    </div>
+  </div>
+</body></html>
